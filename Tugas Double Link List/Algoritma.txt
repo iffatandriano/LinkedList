@@ -1,0 +1,788 @@
+program DataKimiaWithDoubleLinkList
+
+type
+    Point = ^Data
+    Alat = record
+        Total : Integer
+        Kode,Nama : String
+    endRecord    
+    Data = record
+        Info : Alat
+        Prev, Next : Point
+    endRecord
+
+Kamus
+    Awal, Akhir,Debug : Point
+    MenuUtama, SubMenu,SubPilih  : Integer
+
+Procedure MenuAwal(Kamus MenuUtama : Integer)
+{I.S : user mememilih data dari menu utama}
+{F.S : user menampilkan menu yang telah di dipilih}
+Algoritma
+     output ('----------------MENU UTAMA---------------')
+     output ('   1. Sisip Data                       ')
+     output ('   2. Hapus data                       ')
+     output ('   3. Cari data                        ')
+     output ('   4. Tampil data                      ')
+     output ('   0. Keluar                           ')
+     output ('-----------------------------------------')
+     output ('Masukkan Pilihan Anda :                   ')
+     output ('-----------------------------------------')
+     input(MenuUtama)
+
+    // validasi Menu Utama
+    while(MenuUtama < 0) or (MenuUtama > 4) do          
+        output('Menu Pilihan Hanya 0/1/2/3/4, Ulangi!')
+        input (MenuUtama)
+    endWhile
+endProcedure
+
+Procedure MenuSisip(Kamus SubMenu : Integer)
+{I.S : user mememilih data dari Menu Sisip}
+{F.S : user menampilkan data yang telah di dipilih}
+Algoritma 
+     output ('----------------MENU SISIP----------------')
+     output ('   1. Sisip Depan                       ')
+     output ('   2. Sisip Tengah                      ')
+     output ('   3. Sisip Belakang                    ')
+     output ('   0. Keluar                            ')
+     output ('------------------------------------------')
+     output ('Masukkan Pilihan Anda :                  ')
+     output ('------------------------------------------')
+     input(SubMenu)
+
+    //validasi Menu dari Menu Sisip
+    while(SubMenu < 0 ) or (SubMenu > 3) do       
+        output('Menu Pilihan Hanya 0/1/2/3/4, Ulangi!')         
+        String   input(SubMenu)
+    endWhile
+endProcedure
+
+Procedure MenuSisipTengah(Kamus SubPilih : Integer)
+{I.S : user mememilih data dari Menu Sisip}
+{F.S : user menampilkan data yang telah di dipilih}
+Algoritma
+      output ('---------------SISIP TENGAH-------------')
+      output ('   1. Sebelum                           ')
+      output ('   2. Setelah                           ')
+      output ('   0. Keluar                            ')
+      output ('----------------------------------------')
+      output ('Masukkan Pilihan Anda :                 ')
+      output ('----------------------------------------')
+	input(SubPilih)
+
+    //validasi Menu dari Menu Sisip
+    while(SubPilih < 0 ) or (SubPilih > 2) do          
+        output('Menu Pilihan Hanya 0/1/2/ Ulangi!')         
+        input(SubPilih)
+    endWhile
+endProcedure
+
+Procedure MenuHapusData(Kamus SubMenu : Integer)
+{I.S : user mememilih data dari Menu Sisip}
+{F.S : user menampilkan data yang telah di dipilih}
+Algoritma  
+     output ('----------------MENU HAPUS----------------')
+     output ('   1. Hapus Depan                       ')
+     output ('   2. Hapus Tengah                      ')
+     output('   3. Hapus Belakang                    ')
+     output('   0. Keluar                            ')
+     output('------------------------------------------')
+     output('Masukkan Pilihan Anda :                  ')
+     output('------------------------------------------')
+     input(SubMenu)
+
+    //validasi Menu dari Menu Sisip
+    while(SubMenu < 0 ) or (SubMenu > 3) do          
+        output('Menu Pilihan Hanya 0/1/2/3/4, Ulangi!')
+	  input(SubMenu)
+    endWhile
+endEndProcedure
+
+
+
+
+
+
+
+
+Procedure MenuCari(Kamus SubMenu : Integer)
+{I.S : user mememilih data dari Menu Sisip}
+{F.S : user menampilkan data yang telah di dipilih}
+Algoritma
+     output ('----------------MENU CARI---------------------------')
+     output ('   1. Cari Data Dengan Kode                      ')
+     output ('   2. Cari Data Dengan Nama                      ')
+     output('   3. Cari Data Dengan Jumlah                    ')
+     output('   0. Kembali Ke Menu                            ')
+     output('----------------------------------------------------')
+     output('Masukkan Pilihan Anda :                            ')
+     output('----------------------------------------------------')
+     input(SubMenu)
+
+    //validasi Menu dari Menu Sisip
+    while(SubMenu < 0 ) or (SubMenu > 3) do          
+        output('Menu Pilihan Hanya 0/1/2/3/4, Ulangi!')
+	  input(SubMenu)
+    endWhile
+endProcedure
+
+Procedure MenuCariDataWithJumlah(Kamus SubPilih : Integer)
+{I.S : user mememilih data dari Menu Sisip}
+{F.S : user menampilkan data yang telah di dipilih}
+Algoritma
+      output ('---------------CARI DATA DENGAN JUMLAH-------------')
+      output ('   1. Cari Data Dengan Jumlah Kurang Dari      ')
+      output ('   2. Cari Data Dengan Jumlah Lebih Dari       ')
+      output ('   0. Keluar                                   ')
+      output ('-----------------------------------------------')
+      output ('Masukkan Pilihan Anda :                        ')
+      output ('---------------------------------------------------')
+      input(SubPilih)
+
+    //validasi Menu dari Menu Sisip
+    while(SubPilih < 0 ) or (SubPilih > 2) do          
+        output('Menu Pilihan Hanya 0/1/2/ Ulangi!')         
+        input(SubPilih)
+    endWhile
+endProcedure
+
+function DataAlat() : Alat
+{I.S : user memasukkan DataAlat yang ingin dimasukkan}
+{F.S : Menghasilkan Data Alat Baru}
+Kamus
+    Data : Alat
+Algoritma
+     output ('------------------------------------')
+     output ('Kode Alat    : ') input(Data.Kode)
+    while(Data.Kode = ' ') or (Data.Kode = '') do
+      output('Kode tidak boleh kosong!')
+      output('Enter untuk Memasukkan Kembali!')  
+      input(Data.Kode)
+     end
+     output ('Nama Alat    : ') 
+       input(Data.Nama)
+     output('Banyak Alat  : ') 
+       input(Data.Total)
+    while(Data.Kode = ' ') or (Data.Kode = '') do
+      output('Kode tidak boleh kosong!')
+      output('Enter untuk Memasukkan Kembali!') 
+      input(Data.Kode)
+     endWhile
+    while(Data.Total < 0) do
+      output('Banyak tidak boleh dibawah 0!')
+      output('Enter untuk Memasukkan Kembali!’)  
+      input(Data.Kode)
+     endWhile
+     output('------------------------------------')
+    DataAlat := Data
+end
+
+Procedure Penciptaan(Kamus Awal,Akhir : Point)
+Algoritma
+    Awal := nil
+    Akhir := nil    
+end
+
+Procedure SisipDepan(Kamus Awal, Akhir : Point)
+{I.S : user memasukkan data yang akan di sisipkan di depan}
+{F.S : menampilkan data baru yang akan disisipkan di depan}
+Kamus
+    Baru : Point
+Algoritma
+    Alloc(Baru)
+    Baru^.Info := DataAlat()
+    Baru^.Prev := nil
+    if(Awal = nil)
+        then
+                Baru^.Next := nil
+                Akhir := Baru
+            end
+        else
+                Baru^.Next := Awal
+                Awal^.Prev := Baru
+        	Awal := Baru    
+        	  output('Data Berhasil Ditambahkan!')
+endProcedure
+
+Procedure SisipBelakang(Kamus Awal,Akhir : Point)
+{I.S : user memasukkan data yang akan di sisipkan di belakang}
+{F.S : menampilkan data baru yang akan disisipkan di belakang}
+Kamus 
+    Baru : Point
+Algoritma
+    Alloc(Baru)
+    Baru^.info := DataAlat()
+    Baru^.Next := nil
+
+    if(Akhir = nil)
+        then
+                Baru^.Prev := nil
+                Awal := Baru      
+        else   
+                Baru^.Prev := Akhir
+                Akhir^.Next := Baru
+
+         Akhir := Baru
+         output('Data Berhasil Ditambahkan!')
+end
+
+Procedure SisipTengahSebelum(Kamus Awal,Akhir : Point)
+{I.S : memasukkan data dengan disisipkan ditengah node sebelumnya }
+{F.S : menampilkan data yang telah disisipkan di tengah sebelum}
+Kamus
+    Bantu, Baru : Point
+    Ketemu : boolean
+    counter, Node : Integer
+Algoritma
+    
+    Alloc(Baru)
+    Baru^.info := DataAlat()
+    if(Awal = nil)
+        then
+           
+                Baru^.Prev := nil
+                Baru^.Next := nil
+                Awal := Baru
+                Akhir := Baru
+            
+        else
+            
+            repeat
+                
+                (42,13)
+                output('Menyisipkan Data sebelum Node ke : ') input(Node)
+                counter := 1
+                Bantu := Awal
+                ketemu := false
+                while(Bantu <> nil) and (not Ketemu) do
+                    if(counter = Node)
+                        then
+                            Ketemu := True                  
+                        else                 
+                                counter := counter + 1
+                                Bantu := Bantu^.Next
+                end // endwhile
+                if(not Ketemu) then
+                  output('Node Tidak Ditemukan Ulangi Lagi!')
+                  output('Tekan Enter!')
+               
+                  
+                 
+            until(Node > 0) AND (Ketemu)
+                        if(Ketemu) and (Bantu = Awal)
+                            then
+                            
+                                    Baru^.Prev := nil
+                                    Baru^.Next := Awal
+                                    Awal^.Prev := Baru
+                                    Awal := Baru
+                              
+                            else
+                               
+                                    Baru^.Next := Bantu
+                                    Baru^.Prev := Bantu^.Prev
+                                    Bantu^.Prev^.Next := Baru
+                                    Bantu^.Prev := Baru
+                                
+            end
+end
+
+Procedure SisipTengahSetelah(Kamus Awal, Akhir : Point)
+{I.S : memasukkan data dengan disisipkan ditengah node setelahnya }
+{F.S : menampilkan data yang telah disisipkan di tengah setelah}
+Kamus
+    bantu, baru : point
+    counter, node : Integer
+    ketemu : boolean
+Algoritma
+  
+  Alloc(Baru)
+  Baru^.info := DataAlat()
+
+  if(Awal = Nil) then
+  
+        Awal := Baru
+        Akhir := Baru
+        Baru^.next := nil
+        Baru^.prev := nil
+   
+  else
+   
+   repeat
+                
+                output('Menyisipkan Data sebelum Node ke : ') 
+     input(Node)
+                counter := 1
+                Bantu := Awal
+                ketemu := false
+                while(Bantu <> nil) and (not Ketemu) do
+                    if(counter = Node)
+                        then
+                                                  Ketemu := True
+                                                 else
+                          
+                                counter := counter + 1
+                                Bantu := Bantu^.Next
+                            
+                end // endwhile
+                if(not Ketemu) then
+                 
+                    output('Node Tidak Ditemukan Ulangi Lagi!')
+                    output('Tekan Enter!')
+                    
+                    
+                 endIf
+            until(Node > 0) AND (Ketemu)
+
+      if(Ketemu) And (Bantu = Akhir) then
+  
+            Akhir^.next := Baru
+            Baru^.prev := Akhir
+            Baru^.next := Nil
+            Akhir := Baru
+       end
+      else
+       
+            Baru^.next := Bantu^.next
+            Baru^.prev := Bantu
+            Bantu^.next := Baru
+            Baru^.next^.prev := Baru
+       end
+   end
+end
+
+Procedure HapusDepan(Kamus Awal, Akhir : Point)
+{I.S : data sudah terdefinisi}
+{F.S : menghapus data dari sisip depan}
+Kamus
+    Phapus : Point
+Algoritma
+    Phapus := Awal
+
+    if(Awal = Akhir)
+        then
+            Penciptaan(Awal,Akhir)
+        else
+          
+                Awal := Awal^.Next
+                Awal^.Prev := nil
+            endIf
+    
+    Dealloc(Phapus)
+     output('Data Berhasil Dihapus..')
+end
+
+Procedure HapusBelakang(Kamus Awal,Akhir : Point)
+{I.S : data sudah terdefinisi}
+{F.S : menghapus data dari sisip belakang}
+Kamus
+    Phapus : Point
+Algoritma
+    Phapus := Akhir
+
+    if(Awal = Akhir)
+        then
+            Penciptaan(Awal,Akhir)
+        else
+            
+                Akhir := Akhir^.Prev
+                Akhir^.Next := nil
+            end
+
+     Dealloc(Phapus)
+     output('Data Berhasil Dihapus..')
+end
+
+Procedure HapusTengah(Kamus Awal, Akhir : Point)
+{I.S : data sudah terdefinisi}
+{F.S : menghapus data dari sisip tengah}
+Kamus
+    bantu, phapus : point
+    kodecari : String
+    ketemu : boolean
+Algoritma
+    if(Awal = Akhir) then
+  
+        Penciptaan(Awal,Akhir)
+    else
+   
+        ketemu := false
+
+        Repeat // Cari Kode
+        (38,5)
+        (38,5)output('Masukkan Kode cari : ')input(kodecari)
+        bantu := awal
+        while(bantu <> nil) and (not Ketemu) do
+        Algoritma
+            if(Kodecari = bantu^.info.kode) then
+                Ketemu := True
+            else
+                    Bantu := Bantu^.next
+            end
+        until(Ketemu) // Cari Kode
+
+        if(Ketemu) and (Bantu = Awal) then
+        
+            HapusDepan(Awal,Akhir)
+        
+        else if(Ketemu) and (Bantu = Akhir) then
+        
+            HapusBelakang(Awal,Akhir)
+       
+        else // Hapus Tengah        
+            Phapus := Bantu
+            Bantu := Bantu^.prev
+            Bantu^.next := Phapus^.next
+            Phapus^.next^.prev := Bantu
+            Phapus^.next := Nil
+            Phapus^.prev := nil
+        endIf
+    endIf
+  Dealloc(Phapus)
+   output('Data Berhasil Dihapus..')
+end
+
+Procedure CariKode(Awal : Point)
+{I.S : mencari data dengan menggunakan Kode}
+{F.S : menampilkan semua data dengan menggunakan Kode}
+Kamus
+    Bantu : Point
+    Kode : String
+    Ketemu : boolean
+Algoritma
+     output('Masukkan Kode Yang Ingin Dicari : ') input(Kode)
+
+    Bantu := Awal
+    Ketemu := false
+
+    while(not Ketemu) and (Bantu <> nil) do
+        if(Bantu^.Info.Kode = Kode)
+            then
+                Ketemu := true
+            else    
+                Bantu := Bantu^.Next
+    endWhile
+
+    if(Ketemu)
+        then
+                
+                
+                output
+                 output('------------------------------------')
+                 output('Data Alat Kimia Dari Kode    : ', Kode)
+                 output('Nama Alat                    : ', Bantu^.Info.Nama)
+                 output('Quality Alat                 : ', Bantu^.Info.Total)
+                 output('------------------------------------')
+           
+        else
+            
+                 (routput('Data Dengan Kode ', Kode, ' Tidak Ditemukan!')
+            end
+end
+
+Procedure CariNama(Awal : Point)
+{I.S : mencari data dengan menggunakan Nama}
+{F.S : menampilkan semua data dengan menggunakan Nama}
+Kamus
+    Bantu : Point
+    Nama : String
+    Ketemu : boolean
+Algoritma
+     output('Nama Yang Ingin Dicari : ') input(Nama)
+
+    Bantu := Awal
+    Ketemu := false
+
+    while(not Ketemu) and (Bantu <> nil) do
+  
+        if(Bantu^.Info.Nama = Nama)
+            then
+                Ketemu := true
+            else
+                Bantu := Bantu^.Next
+	  EndIf
+    endWhile
+
+    if(Ketemu)
+         then             
+                 output ('------------------------------------')
+                 output('Data Alat Kimia Dari Nama    : ', Nama)
+                 output('Kode Alat                    : ', Bantu^.Info.Kode)                
+                 output('Nama Alat                    : ', Bantu^.Info.Nama)
+                 output('Quality Alat                 : ', Bantu^.Info.Total)
+                (38,18) output('------------------------------------')
+           
+        else
+                 (red) output('Data Dengan Nama ', Nama, ' Tidak Ditemukan!')
+            endIf
+EndProcedure
+Procedure CariKurangDari(Awal : point)
+{I.S : user memasukkan jumlah yang ingin dicari didata}
+{F.S : menampilkan dari seluruh data yang jumlahnya kurang dari yang di inputkan}
+Kamus
+    bantu : point
+    Dicari,i : Integer
+    Ketemu : boolean
+Algoritma
+  output('Jumlah yang dicari kurang dari : ') input(dicari)
+ while(dicari < 0 ) do
+    output('Jumlah Salah!')
+    output('Enter Untuk Masukkan Kembali!')
+    Input(Dicari)
+  endWhile
+    
+    i := 1
+    Bantu := Awal
+    Ketemu := false
+
+    while(Bantu <> nil) do
+        if(Bantu^.Info.Total <  Dicari)
+            then
+                Ketemu := true
+                
+                
+                (38,1+2)   output('Data Alat Yang Kurang Dari - ',Dicari)
+                (38,1+5*i) output('------------------------------------')
+                (38,2+5*i) output('Kode                         : ', Bantu^.info.kode)
+                (38,3+5*i) output('Nama Alat                    : ', Bantu^.Info.Nama)
+                (38,4+5*i) output('Jumlah Alat                  : ', Bantu^.Info.Total)
+                (38,5+5*i) output('------------------------------------')
+                endIf
+        bantu := Bantu^.next
+        I := I + 1
+    endWhile
+
+    if(Not Ketemu) then
+         (red) output('Data Tidak Ditemukan!')
+     endIf
+endProcedure
+
+Procedure CariLebihDari(Awal : point)
+{I.S : user memasukkan jumlah yang ingin dicari didata}
+{F.S : menampilkan dari seluruh data yang jumlahnya lebih dari yang di inputkan}
+Kamus
+    bantu : point
+    Dicari,i : Integer
+    Ketemu : boolean
+Algoritma
+  output('Jumlah yang dicari kurang dari : ') input(dicari)
+ while(dicari < 0 ) do
+    output('Jumlah Salah!')
+    output('Enter Untuk Masukkan Kembali!')
+    input(72,12)
+  endWhile
+    
+    i := 1
+    Bantu := Awal
+    Ketemu := false
+
+    while(Bantu <> nil) do
+        if(Bantu^.Info.Total >= Dicari)
+            then
+                Algoritma
+                Ketemu := true
+                
+                
+                (38,1+2)   output('Data Alat Yang Kurang Dari - ',Dicari)
+                (38,1+5*i) output('------------------------------------')
+                (38,2+5*i) output('Kode                         : ', Bantu^.info.kode)
+                (38,3+5*i) output('Nama Alat                    : ', Bantu^.Info.Nama)
+                (38,4+5*i) output('Jumlah Alat                  : ', Bantu^.Info.Total)
+                (38,5+5*i) output('------------------------------------')
+                endIf
+        bantu := Bantu^.next
+        I := I +1
+    endWhile
+    if(Not Ketemu) then
+         (red) output('Data Tidak Ditemukan!')
+     endIf
+    
+endProcedure
+
+Procedure SortKode(Kamus Awal, Akhir : Point)
+{I.S : list telah terdefinisi}
+{F.S : menghasilkan list yang sudah terurut ASC berdasarkan Kode}
+Kamus
+    i,j,min : Point
+    temp    : Alat
+Algoritma
+    if(Awal <> nil)
+        then
+    
+                i := Awal
+                while(i <> Akhir) do
+                    min := i
+                    j := i^.Next
+                    while(j <> nil) do
+                        if(j^.Info.Kode <= min^.Info.Kode)
+                            then
+                                min := j
+                            j := j^.Next
+                    endWhile
+                    temp := i^.Info
+                    i^.Info := min^.Info
+                    min^.Info := temp
+                    i := i^.Next   
+                endWhile
+            endIf
+endEndProcedure
+
+
+
+
+
+Procedure HapusDuplikat(Kamus Awal, Akhir : Point)
+{I.S : data sudah terdefinisi}
+{F.S : menghasilkan list yang data nya yang sama sudah terhapus}
+Kamus
+    Phapus, Bantu, Bantu2 : Point
+Algoritma
+    Bantu := Awal
+    while(Bantu <> nil) do
+        Phapus := Bantu^.Next
+        while(Phapus <> nil) do
+            if(Phapus^.Info.Kode = Bantu^.Info.Kode)
+                then
+                    if(Phapus =  Akhir)
+                        then
+                     
+                                Phapus^.Prev^.Next := nil
+                                Akhir := Phapus^.Prev
+                        else
+                          
+                                Phapus^.Prev^.Next := Phapus^.Next
+                                Phapus^.Next^.Prev := Phapus^.Prev
+                            endIf
+                            Bantu2 := Phapus
+                            Phapus := Phapus^.Next
+                            Dealloc(Bantu2)
+                    
+                else
+                        Phapus := Phapus^.Next
+        endIf
+            Bantu := Bantu^.Next
+	EndWhile
+    endWhiile
+endProcedre
+
+Procedure TampilData(Awal : Point)
+{I.S : data sudah terdefinisi}
+{F.S : menampilkan semua data yang telah dimasukkan dari Sisip Depan,Tengah, & Belakang}
+Kamus
+    Bantu : Point
+    Baris : Integer
+Algoritma
+    
+    if(Awal = nil)
+        then
+                output('Data kosong!')(7)
+        else
+            SortKode(Awal,Akhir)
+            HapusDuplikat(Awal,Akhir)
+            Bantu := Awal
+            
+            
+             output('Data Alat Kimiah')
+             output('----------------')
+             output('-------------------------------------------------')
+             output('| KODE |    NAMA ALAT       |   QUALITY ALAT    |')
+             output('-------------------------------------------------')
+            Baris := 1
+            while(Bantu <> nil) do
+                (38,15+baris) output('|      |                    |                   |')
+                (38+2,15+Baris) output(Bantu^.Info.Kode)
+                (38+12,15+Baris) output(Bantu^.Info.Nama)
+                (38+39,15+Baris) output(Bantu^.Info.Total)
+                inc(Baris)
+                Bantu := Bantu^.Next
+            endWhile
+            (38,15+baris) output('-------------------------------------------------')
+            (38,15+baris+1) output('Tekan Enter Untuk Keluar')
+        endIf
+endProcedure
+
+Procedure Penghancuran(Kamus Awal, Akhir : Point)
+{I.S : data sudah terdefinisi}
+{F.S : menghapus semua data yang telah diisikan kedalam program}
+Kamus
+    Phapus : Point
+Algoritma
+    while(Awal <> Akhir) do
+        Phapus := Awal
+        Awal := Awal^.Next
+        Dealloc(Phapus)
+    endWhile
+    
+    Phapus := Awal
+    Penciptaan(Awal,Akhir)
+    Dealloc(Phapus)
+endProcedure
+
+Algoritma
+    Penciptaan(Awal,Akhir)
+    repeat
+    Debug := awal
+    while(Debug <> Nil) do
+      output(Debug^.info.kode,' ')
+      debug := debug^.next
+     endWhile
+    
+    MenuAwal(MenuUtama)
+    Depend (MenuUtama) on
+        1 : MenuSisip(SubMenu)
+                Depend (SubMenu) on
+                1 : SisipDepan(Awal,Akhir)
+                   
+                2 :repeat
+                   MenuSisipTengah(SubPilih)
+                   Depend (SubPilih) on
+                     1 :  SisipTengahSebelum(Awal,Akhir)
+                     2 :  SisipTengahSetelah(Awal,Akhir)
+                      endDepend
+                    until(SubPilih = 0)
+                3 : SisipBelakang(Awal,Akhir)
+                endDepend
+                until(SubMenu = 0)
+            end
+        2 : 
+                repeat
+                MenuHapusData(SubMenu)
+                Depend (SubMenu) of
+                1 : 
+                        
+                        HapusDepan(Awal,Akhir)
+                        
+                2 : 
+                        HapusTengah(Awal,Akhir)
+                        
+                3 : 
+                        HapusBelakang(Awal,Akhir)
+                        
+                endDepend
+                until(SubMenu = 0)
+        3 : 
+                repeat
+                MenuCari(SubMenu)
+                Depend (SubMenu) of
+                1 : CariKode(Awal)
+                        
+                2 :CariNama(Awal)
+                       
+                3 : repeat
+                    
+                    MenuCariDataWithJumlah(SubPilih)
+                    Depend SubPilih of
+                    1 :  CariKurangDari(Awal)
+                    2 :  CariLebihDari(Awal)
+                            
+                    endDepend
+                    until(SubPilih = 0)
+                endDepend
+                until(SubMenu = 0)    
+            
+        4 : TampilData(Awal)
+    end
+    until(MenuUtama = 0)
+    Penghancuran(Awal,Akhir)
+end.
